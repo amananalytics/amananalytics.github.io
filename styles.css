@@ -21,8 +21,14 @@
 body {
     font-family: var(--font-body);
     line-height: 1.7;
-    background-color: var(--bg-dark);
     color: var(--text-light);
+
+    /* --- LOGO WATERMARK STYLES (New Fix) --- */
+    background-color: var(--bg-dark); 
+    background-image: url('aman-logo.png'); /* Assumes you renamed the logo file */
+    background-repeat: repeat;
+    background-size: 150px; 
+    opacity: 0.015; /* Makes the logo extremely faint */
 }
 
 .container {
@@ -31,6 +37,7 @@ body {
     margin: auto;
     overflow: hidden;
     padding: 25px 0;
+    opacity: 1; /* Ensures content is fully visible over the faint background */
 }
 
 h1, h2, h3 {
@@ -59,17 +66,21 @@ header .container {
 }
 
 .logo-container img {
-    height: 35px; /* Slightly smaller */
-    filter: drop-shadow(0 0 5px var(--accent-color)); /* Glow effect on logo */
+    height: 50px; /* INCREASED HEIGHT for prominence */
     margin-right: 15px;
+    /* Filter to help blend white background PNG on dark site */
+    filter: 
+        drop-shadow(0 0 5px var(--accent-color)) 
+        grayscale(100%)
+        brightness(1000%); 
 }
 
 header h1 {
-    font-size: 26px;
+    font-size: 32px; /* INCREASED FONT SIZE for prominence */
     color: var(--accent-color);
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px; 
 }
 
 nav a {
@@ -82,7 +93,7 @@ nav a {
 
 nav a:hover {
     color: var(--accent-color);
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7); /* Subtle glow on hover */
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7); 
 }
 
 /* --- 3. Hero Section (High Impact) --- */
@@ -97,7 +108,7 @@ nav a:hover {
 }
 
 .hero .container {
-    border-left: 4px solid var(--accent-color); /* Visual element */
+    border-left: 4px solid var(--accent-color); 
     padding-left: 30px;
 }
 
