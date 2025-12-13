@@ -1,13 +1,15 @@
-/* --- 1. Global Reset and Typography --- */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+/* --- 1. Global Reset and Typography (Cyber-Analyst Theme) --- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #007bff; /* Bright Blue Accent (from logo) */
-    --secondary-color: #343a40; /* Dark Background */
-    --text-light: #f8f9fa; /* Light Text */
-    --text-dark: #212529; /* Dark Text */
-    --container-bg: #495057; /* Slightly lighter container background */
-    --link-color: #17a2b8; /* Cyan for links */
+    --bg-dark: #121217; /* Deep Charcoal Background */
+    --accent-color: #00FFFF; /* Neon Cyan/Aqua Accent */
+    --text-light: #E0E0E0; /* Light Gray Text */
+    --text-mid: #999999; /* Mid Gray Secondary Text */
+    --border-subtle: #292930; /* Dark, Subtle Border */
+    --hover-bg: #1e1e24; 
+    --font-heading: 'Orbitron', sans-serif; /* Futuristic Heading Font */
+    --font-body: 'Space Mono', monospace; /* Monospaced, Analytical Body Font */
 }
 
 * {
@@ -17,30 +19,32 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    background-color: var(--secondary-color);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    background-color: var(--bg-dark);
     color: var(--text-light);
 }
 
 .container {
     width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     overflow: hidden;
-    padding: 20px 0;
+    padding: 25px 0;
 }
 
 h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
     margin-bottom: 15px;
     font-weight: 700;
 }
 
 /* --- 2. Header and Navigation --- */
 header {
-    background: var(--secondary-color);
-    border-bottom: 3px solid var(--primary-color);
-    padding: 10px 0;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 15px 0;
 }
 
 header .container {
@@ -49,122 +53,139 @@ header .container {
     align-items: center;
 }
 
-header h1 {
-    font-size: 24px;
-    color: var(--text-light);
-    margin: 0;
-}
-
-nav a {
-    color: var(--text-light);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-left: 20px;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* --- 3. Logo Styling --- */
 .logo-container {
     display: flex;
     align-items: center;
 }
 
 .logo-container img {
-    height: 40px; /* Adjust height as needed */
-    margin-right: 10px;
-    vertical-align: middle;
+    height: 35px; /* Slightly smaller */
+    filter: drop-shadow(0 0 5px var(--accent-color)); /* Glow effect on logo */
+    margin-right: 15px;
 }
 
-/* --- 4. Hero Section --- */
+header h1 {
+    font-size: 26px;
+    color: var(--accent-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 25px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7); /* Subtle glow on hover */
+}
+
+/* --- 3. Hero Section (High Impact) --- */
 .hero {
-    min-height: 60vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
-    text-align: center;
-    background-color: #2c3e50; /* A slightly darker blue for contrast */
-    padding: 80px 0;
-    border-bottom: 1px solid var(--container-bg);
+    text-align: left;
+    background: var(--bg-dark);
+    padding: 100px 0;
+    border-bottom: 2px solid var(--border-subtle);
+}
+
+.hero .container {
+    border-left: 4px solid var(--accent-color); /* Visual element */
+    padding-left: 30px;
 }
 
 .hero h2 {
-    font-size: 48px;
-    color: var(--primary-color);
+    font-size: 56px;
+    line-height: 1.1;
+    color: var(--accent-color);
     margin-bottom: 20px;
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
+    font-size: 20px;
+    color: var(--text-mid);
+    max-width: 700px;
+    margin-bottom: 40px;
 }
 
 .button {
     display: inline-block;
-    background: var(--primary-color);
-    color: var(--text-light);
-    padding: 10px 20px;
+    background: var(--accent-color);
+    color: var(--bg-dark);
+    padding: 12px 25px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px;
     font-weight: 700;
-    transition: background 0.3s;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 .button:hover {
-    background: #0056b3;
+    background: var(--text-light);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px var(--accent-color);
 }
 
-/* --- 5. Project and About Sections --- */
+/* --- 4. Project and About Sections --- */
 section {
-    padding: 40px 0;
-    background-color: var(--secondary-color);
-}
-
-section:nth-child(even) { /* Adds a subtle stripe effect */
-    background-color: #2b3035; 
+    padding: 60px 0;
+    background-color: var(--bg-dark);
 }
 
 h3 {
     text-align: center;
-    font-size: 30px;
-    color: var(--primary-color);
-    margin-bottom: 30px;
+    font-size: 32px;
+    color: var(--accent-color);
+    margin-bottom: 40px;
+    text-transform: uppercase;
 }
 
 /* Project Cards */
 .projects .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
 
 .project-card {
-    background: var(--container-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-    border-top: 3px solid var(--primary-color);
+    background: var(--hover-bg);
+    padding: 25px;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
 }
 
 .project-card h4 {
-    color: var(--text-light);
-    font-size: 20px;
+    color: var(--accent-color);
+    font-family: var(--font-heading);
+    font-size: 22px;
+    border-bottom: 1px dashed var(--border-subtle);
+    padding-bottom: 10px;
 }
 
 .link {
     display: block;
-    margin-top: 15px;
-    color: var(--link-color);
+    margin-top: 20px;
+    color: var(--accent-color);
     text-decoration: none;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
 .link:hover {
@@ -178,49 +199,57 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     text-align: center;
     margin-top: 20px;
 }
 
 .about li {
-    background: var(--container-bg);
+    background: var(--hover-bg);
     padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: 300;
-    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    font-weight: 400;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    transition: background 0.3s;
 }
 
-/* --- 6. Contact and Footer --- */
+.about li:hover {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+/* --- 5. Contact and Footer --- */
 .contact {
     text-align: center;
     padding-bottom: 50px;
 }
 
 .contact a {
-    color: var(--primary-color);
+    color: var(--accent-color);
     text-decoration: none;
 }
 
 footer {
-    background: #1c2125;
+    background: #0d0d10;
     text-align: center;
-    padding: 10px 0;
-    font-size: 12px;
+    padding: 15px 0;
+    font-size: 14px;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-mid);
 }
 
-/* --- 7. Responsive Adjustments --- */
-@media (max-width: 600px) {
+/* --- 6. Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 40px;
+    }
     header .container {
         flex-direction: column;
     }
     nav {
-        margin-top: 10px;
+        margin-top: 15px;
     }
     nav a {
         margin: 0 10px;
-    }
-    .hero h2 {
-        font-size: 36px;
     }
 }
