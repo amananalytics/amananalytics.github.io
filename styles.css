@@ -23,26 +23,17 @@ body {
     line-height: 1.7;
     color: var(--text-light);
     
-    /* --- LOGO WATERMARK STYLES (CORRECTED FIX) --- */
+    /* FIX: ALL WATERMARK STYLES REMOVED FOR CLEAN BACKGROUND */
     background-color: var(--bg-dark); 
-    background-image: url('aman-logo.png'); /* Ensure local image name is 'aman-logo.png' */
-    background-repeat: repeat;
-    background-size: 150px; 
-    
-    /* CRUCIAL FIX: Use filter to fade the image, ensuring content layers remain fully visible */
-    filter: opacity(0.02) grayscale(100%); 
 }
 
-/* We must separate the container styles from the body styles to maintain content visibility */
 .container {
     width: 90%;
     max-width: 1200px;
     margin: auto;
     overflow: hidden;
     padding: 25px 0;
-    /* Ensure content is positioned correctly above the filtered background */
-    position: relative; 
-    z-index: 20; 
+    /* Removed redundant z-index */
 }
 
 h1, h2, h3 {
@@ -155,9 +146,7 @@ nav a:hover {
 section {
     padding: 60px 0;
     background-color: var(--bg-dark);
-    /* Ensure content layers above the body background filter */
-    position: relative; 
-    z-index: 10; 
+    /* Removed redundant positioning */
 }
 
 h3 {
@@ -265,10 +254,3 @@ footer {
     header .container {
         flex-direction: column;
     }
-    nav {
-        margin-top: 15px;
-    }
-    nav a {
-        margin: 0 10px;
-    }
-}
