@@ -22,22 +22,27 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-light);
-
-    /* --- LOGO WATERMARK STYLES (New Fix) --- */
+    
+    /* --- LOGO WATERMARK STYLES (CORRECTED FIX) --- */
     background-color: var(--bg-dark); 
-    background-image: url('aman-logo.png'); /* Assumes you renamed the logo file */
+    background-image: url('aman-logo.png'); /* Ensure local image name is 'aman-logo.png' */
     background-repeat: repeat;
     background-size: 150px; 
-    opacity: 0.015; /* Makes the logo extremely faint */
+    
+    /* CRUCIAL FIX: Use filter to fade the image, ensuring content layers remain fully visible */
+    filter: opacity(0.02) grayscale(100%); 
 }
 
+/* We must separate the container styles from the body styles to maintain content visibility */
 .container {
     width: 90%;
     max-width: 1200px;
     margin: auto;
     overflow: hidden;
     padding: 25px 0;
-    opacity: 1; /* Ensures content is fully visible over the faint background */
+    /* Ensure content is positioned correctly above the filtered background */
+    position: relative; 
+    z-index: 20; 
 }
 
 h1, h2, h3 {
@@ -66,9 +71,9 @@ header .container {
 }
 
 .logo-container img {
-    height: 50px; /* INCREASED HEIGHT for prominence */
+    height: 50px; /* Increased Height */
     margin-right: 15px;
-    /* Filter to help blend white background PNG on dark site */
+    /* Filter for blending white background PNG on dark site */
     filter: 
         drop-shadow(0 0 5px var(--accent-color)) 
         grayscale(100%)
@@ -76,7 +81,7 @@ header .container {
 }
 
 header h1 {
-    font-size: 32px; /* INCREASED FONT SIZE for prominence */
+    font-size: 32px; /* Increased Font Size */
     color: var(--accent-color);
     margin: 0;
     text-transform: uppercase;
@@ -150,6 +155,9 @@ nav a:hover {
 section {
     padding: 60px 0;
     background-color: var(--bg-dark);
+    /* Ensure content layers above the body background filter */
+    position: relative; 
+    z-index: 10; 
 }
 
 h3 {
