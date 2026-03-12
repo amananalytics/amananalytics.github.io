@@ -1,73 +1,1160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aman Analytics | Statistics & Predictive Modeling Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abdulrahman Sanni — Statistics & Data Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg: #0B0B0B;
+      --surface: #141414;
+      --surface2: #1C1C1C;
+      --border: #262626;
+      --gold: #C9A84C;
+      --gold-dim: #8B7233;
+      --blue: #4E7FA6;
+      --text: #E4E0D8;
+      --muted: #7A7670;
+      --faint: #2A2A2A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.4s, background 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(11,11,11,0.92);
+      border-color: var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 6rem 3rem 5rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-name {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name span {
+      color: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 38ch;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.8rem;
+      background: var(--gold);
+      color: #0B0B0B;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 5rem;
+      position: relative;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .stat-cell {
+      background: var(--bg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .stat-number {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-data-strip {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .data-strip-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1rem;
+    }
+
+    .skills-ticker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--surface2);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 3rem;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .scroll-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem 3rem; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .about-left {}
+    .about-right {
+      padding-top: 5rem;
+    }
+
+    .about-body {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .about-body strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-highlight {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1.5;
+      padding: 1.5rem;
+      border-left: 2px solid var(--gold);
+      margin: 2rem 0;
+      font-weight: 300;
+    }
+
+    .about-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 1rem;
+    }
+
+    .about-card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .about-card-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .about-card-value a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .about-card-value a:hover { text-decoration: underline; }
+
+    /* ── PROJECTS ── */
+    #projects {
+      border-top: 1px solid var(--border);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .project-card {
+      background: var(--bg);
+      padding: 3rem;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .project-card:hover { background: var(--surface); }
+
+    .project-card.featured {
+      grid-column: 1 / 3;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 3rem;
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge-featured {
+      color: var(--gold);
+      border-color: var(--gold-dim);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .badge-wip {
+      color: var(--blue);
+      border-color: var(--blue);
+      background: rgba(78,127,166,0.08);
+    }
+
+    .badge-done {
+      color: #7A9C6E;
+      border-color: #4A6B3E;
+      background: rgba(122,156,110,0.08);
+    }
+
+    .project-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--faint);
+    }
+
+    .project-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .project-link::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .project-link:hover::after { transform: translateX(4px); }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .project-meta-item {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .meta-value {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .progress-bar {
+      margin-top: 0.75rem;
+      height: 3px;
+      background: var(--faint);
+      position: relative;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--gold);
+      transition: width 1s ease;
+    }
+
+    /* ── SKILLS ── */
+    #skills {
+      border-top: 1px solid var(--border);
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .skill-group {
+      background: var(--bg);
+      padding: 2.5rem;
+    }
+
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .skill-level {
+      display: flex;
+      gap: 3px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--border);
+    }
+
+    .dot.filled { background: var(--gold); }
+    .dot.half { background: var(--gold-dim); }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-heading {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-heading em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .contact-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .contact-link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-link-row:hover { background: var(--surface); }
+
+    .contact-link-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .contact-arrow {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .footer-right {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .footer-right a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ── DECORATIVE GRID ── */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--faint) 1px, transparent 1px),
+        linear-gradient(90deg, var(--faint) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { padding: 3rem 1.5rem; }
+      #about { grid-template-columns: 1fr; gap: 0; padding: 4rem 1.5rem; }
+      .about-right { padding-top: 0; }
+      #projects { padding: 4rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: 1; grid-template-columns: 1fr; }
+      #skills { padding: 4rem 1.5rem; }
+      .skills-container { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <img src="aman-logo.png" alt="Aman Analytics Logo">
-                <h1>Aman Analytics</h1>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">AS.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="bg-grid"></div>
+
+    <div class="hero-left">
+      <div class="hero-eyebrow">Statistics & Data Analysis</div>
+      <h1 class="hero-name">Abdulrahman<br/><span>Sanni</span></h1>
+      <p class="hero-title">Final Year Student, University of Abuja</p>
+      <p class="hero-desc">
+        Turning raw data into rigorous, interpretable insights — from stochastic processes and time series to regression modeling and econometric analysis.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Years of Study</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">B.Sc.</div>
+          <div class="stat-label">Statistics (2026)</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">R</div>
+          <div class="stat-label">Primary Tool</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">NBS</div>
+          <div class="stat-label">FYP Data Source</div>
+        </div>
+      </div>
+
+      <div class="hero-data-strip">
+        <div class="data-strip-label">Core Competencies</div>
+        <div class="skills-ticker">
+          <span class="skill-tag">Regression Analysis</span>
+          <span class="skill-tag">Time Series</span>
+          <span class="skill-tag">ANOVA</span>
+          <span class="skill-tag">Stochastic Processes</span>
+          <span class="skill-tag">Markov Chains</span>
+          <span class="skill-tag">Chi-Square Tests</span>
+          <span class="skill-tag">ARMA / ARIMA</span>
+          <span class="skill-tag">R Programming</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <div class="scroll-text">Scroll</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-left fade-in">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <p class="about-body">
+        I'm <strong>Abdulrahman Sanni</strong>, a final-year Statistics student at the <strong>University of Abuja</strong>. My academic journey has been built around mastering the mathematics of uncertainty — probability distributions, stochastic modeling, and the statistical frameworks that underlie real-world decision-making.
+      </p>
+      <p class="about-body">
+        My final year project investigates <strong>job creation and separation dynamics in Nigerian businesses</strong>, drawing on the 2024 NBS Job Creation Survey. I apply econometric and comparative statistical methods to extract policy-relevant insights from one of Nigeria's most comprehensive labour market datasets.
+      </p>
+      <div class="about-highlight">
+        "Statistics is not about numbers — it's about making good decisions under uncertainty."
+      </div>
+      <p class="about-body">
+        Beyond the classroom, I'm passionate about building things with data — from dashboards and models to explorations in the Web3/data ecosystem. I'm actively seeking opportunities in data analysis and quantitative research after graduation.
+      </p>
+    </div>
+
+    <div class="about-right fade-in">
+      <div class="about-card">
+        <div class="about-card-label">Institution</div>
+        <div class="about-card-value">University of Abuja, Faculty of Science</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Degree</div>
+        <div class="about-card-value">Bachelor of Science (B.Sc.) in Statistics</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Matric Number</div>
+        <div class="about-card-value">22/208STA/287</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Supervisor</div>
+        <div class="about-card-value">Dr. Rauf</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Expected Graduation</div>
+        <div class="about-card-value">May 2026</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Location</div>
+        <div class="about-card-value">Abuja, FCT, Nigeria</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">GitHub</div>
+        <div class="about-card-value">
+          <a href="https://github.com/amananalytics" target="_blank">github.com/amananalytics</a>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">LinkedIn</div>
+        <div class="about-card-value">
+          <a href="https://www.linkedin.com/in/abdulrahman-sanni-54a4782b6/" target="_blank">abdulrahman-sanni</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header fade-in">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- FEATURED FYP -->
+      <div class="project-card featured fade-in">
+        <div>
+          <div class="project-badge badge-featured">★ Final Year Project</div>
+          <h3 class="project-title">Comparative Analysis of Job Creation & Separation in Nigerian Businesses</h3>
+          <p class="project-desc">
+            A rigorous comparative statistical study using data from the 2024 NBS Job Creation Survey. The project examines patterns of employment generation and job loss across Nigerian business sectors, applying econometric and inferential statistical methods to identify key drivers and disparities.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">NBS 2024 Survey</span>
+            <span class="project-tag">Comparative Analysis</span>
+            <span class="project-tag">Econometrics</span>
+            <span class="project-tag">R</span>
+            <span class="project-tag">Regression</span>
+            <span class="project-tag">Hypothesis Testing</span>
+          </div>
+          <a href="#" class="project-link">View Project Report</a>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-item">
+            <div class="meta-label">Status</div>
+            <div class="meta-value">In Progress</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 15%"></div>
             </div>
-            <nav>
-                <a href="#about">About Me</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
+          </div>
+          <div class="project-meta-item">
+            <div class="meta-label">Supervisor</div>
+            <div class="meta-value">Dr. Rauf</div>
+          </div>
+          <div class="project-meta-item">
+            <div class="meta-label">Data Source</div>
+            <div class="meta-value">NBS Job Creation Survey (2024)</div>
+          </div>
+          <div class="project-meta-item">
+            <div class="meta-label">Due</div>
+            <div class="meta-value">May 2026</div>
+          </div>
         </div>
-    </header>
+      </div>
 
-    <section id="hero" class="hero">
-        <div class="container">
-            <h2>Statistics Student & Predictive Modeling Enthusiast in Abuja</h2>
-            <p>I transform raw data into actionable insights using advanced statistical models (Regression, Time Series, ML) and tools like Python and R.</p>
-            <a href="#projects" class="button">View My Work</a>
+      <!-- PROJECT 2 -->
+      <div class="project-card fade-in">
+        <div class="project-badge badge-done">Coursework</div>
+        <h3 class="project-title">Time Series Modeling & ARMA Analysis</h3>
+        <p class="project-desc">
+          Applied ARMA(p,q) processes, Yule-Walker equations, and Levinson-Durbin recursion for AR(2) ACF/PACF estimation. Included seasonal decomposition and stationarity testing.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">ARMA</span>
+          <span class="project-tag">ARIMA</span>
+          <span class="project-tag">R</span>
+          <span class="project-tag">ACF / PACF</span>
+          <span class="project-tag">STA 331</span>
         </div>
-    </section>
+      </div>
 
-    <section id="projects" class="projects">
-        <div class="container">
-            <h3>Featured Projects</h3>
-            <div class="project-card">
-                <h4>UniAbuja MFB Fraud Risk Model (Final Year Project)</h4>
-                <p>Mixed-Effects Regression model to predict transaction fraud risk, resulting in a live risk-scoring dashboard.</p>
-                <a href="project-mfb.html" class="link">View Case Study & Demo →</a>
+      <!-- PROJECT 3 -->
+      <div class="project-card fade-in">
+        <div class="project-badge badge-done">Coursework</div>
+        <h3 class="project-title">Stochastic Processes & Queuing Theory</h3>
+        <p class="project-desc">
+          Modeled Markov chain ergodicity, renewal theory, M/M/S queuing systems, and birth-death processes. Implemented simulations and analytical solutions in base R.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Markov Chains</span>
+          <span class="project-tag">M/M/S Queue</span>
+          <span class="project-tag">R</span>
+          <span class="project-tag">STA 401</span>
+        </div>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <div class="project-card fade-in">
+        <div class="project-badge badge-done">Coursework</div>
+        <h3 class="project-title">Regression & ANOVA Investigations</h3>
+        <p class="project-desc">
+          Conducted simple and multiple linear regression, curve fitting, one-way and two-way ANOVA, and chi-square tests for independence — all with full hypothesis testing frameworks.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Regression</span>
+          <span class="project-tag">ANOVA</span>
+          <span class="project-tag">Chi-Square</span>
+          <span class="project-tag">R</span>
+          <span class="project-tag">Inference</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header fade-in">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+
+    <div class="skills-container fade-in">
+      <div class="skill-group">
+        <div class="skill-group-title">Statistical Methods</div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span>Linear Regression</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div>
             </div>
-            
-            <div class="project-card">
-                <h4>Abuja Commuter Time Analysis</h4>
-                <p>Time Series analysis using ARIMA to forecast peak traffic hours in the FCT based on historical weather and public data.</p>
-                <a href="#" class="link">View Analysis →</a>
+          </li>
+          <li class="skill-item">
+            <span>Time Series (ARMA/ARIMA)</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
             </div>
-        </div>
-    </section>
+          </li>
+          <li class="skill-item">
+            <span>ANOVA (One & Two Way)</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Hypothesis Testing</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Stochastic Processes</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Chi-Square Tests</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Probability Distributions</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h3>My Skills & Methodology</h3>
-            <p>Key statistical software and techniques used:</p>
-            <ul>
-                <li>**Modeling:** Multiple Regression, Logistic Regression, Time Series (ARIMA), Mixed-Effects Models.</li>
-                <li>**Tools:** Python (Pandas, Scikit-learn, Statsmodels), R (Tidyverse, ggplot2), SQL.</li>
-                <li>**Deployment:** R Shiny, Python Streamlit, Git/GitHub.</li>
-            </ul>
-        </div>
-    </section>
+      <div class="skill-group">
+        <div class="skill-group-title">Software & Tools</div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span>R (Base R)</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Python</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Git & GitHub</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Microsoft Excel</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>HTML / CSS</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h3>Get in Touch</h3>
-            <p>I am actively seeking opportunities in Data Analysis and Quantitative Risk. Connect with me!</p>
-            <p>Email: <a href="amananalyticss@gmail.com">amananalyticss@gmail.com</a> | LinkedIn: <a href="https://www.linkedin.com/in/abdulrahman-sanni-54a4782b6/">Aman Analytics</a> | GitHub <a href="https://github.com/amananalytics">Aman</a></p>
-        </div>
-    </section>
+      <div class="skill-group">
+        <div class="skill-group-title">Domain Knowledge</div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span>Labour Market Analysis</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Nigerian Economic Data</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Survey Data Analysis</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Data Visualization</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot half"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span>Technical Report Writing</span>
+            <div class="skill-level">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 Aman Analytics. All rights reserved.</p>
-    </footer>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="fade-in">
+      <h2 class="contact-heading">Let's <em>work</em><br/>together.</h2>
+      <p class="contact-body">
+        I'm open to data analysis roles, research collaborations, freelance statistical consulting, and graduate opportunities. Don't hesitate to reach out.
+      </p>
+      <a href="mailto:amananalyticss@gmail.com" class="btn-primary">Send an Email</a>
+    </div>
+
+    <div class="contact-links fade-in">
+      <a href="mailto:amananalyticss@gmail.com" class="contact-link-row">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">amananalyticss@gmail.com</span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="https://github.com/amananalytics" target="_blank" class="contact-link-row">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-value">github.com/amananalytics</span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/abdulrahman-sanni-54a4782b6/" target="_blank" class="contact-link-row">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">abdulrahman-sanni</span>
+        <span class="contact-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">© 2026 Abdulrahman Sanni — Abuja, Nigeria</div>
+    <div class="footer-right">
+      Built to deploy on <a href="https://github.com/amananalytics" target="_blank">GitHub Pages</a>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Fade-in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Animate progress bars
+    const progBars = document.querySelectorAll('.progress-fill');
+    const progObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.style.width;
+        }
+      });
+    }, { threshold: 0.5 });
+    progBars.forEach(b => progObserver.observe(b));
+  </script>
 </body>
 </html>
