@@ -10,16 +10,16 @@
 
   <style>
     :root {
-      --bg: #0B0B0B;
-      --surface: #141414;
-      --surface2: #1C1C1C;
-      --border: #262626;
-      --gold: #C9A84C;
-      --gold-dim: #8B7233;
-      --blue: #4E7FA6;
-      --text: #E4E0D8;
-      --muted: #7A7670;
-      --faint: #2A2A2A;
+      --bg: #0A0F14;
+      --surface: #111820;
+      --surface2: #182028;
+      --border: #1E2D3D;
+      --gold: #00C4D4;
+      --gold-dim: #007A87;
+      --blue: #D4891A;
+      --text: #E4EBF0;
+      --muted: #6A8599;
+      --faint: #162030;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -69,7 +69,11 @@
       letter-spacing: 0.05em;
       color: var(--gold);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
+    .nav-logo img { height: 32px; width: auto; }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -731,7 +735,9 @@
 
   <!-- NAV -->
   <nav id="navbar">
-    <a href="#hero" class="nav-logo">AS.</a>
+    <a href="#hero" class="nav-logo">
+      <img src="amanrealogo.svg" alt="Aman Analytics"/>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -1096,13 +1102,13 @@
       <p class="contact-body">
         I'm open to data analysis roles, research collaborations, freelance statistical consulting, and graduate opportunities. Don't hesitate to reach out.
       </p>
-      <a href="mailto:amananalyticss@gmail.com" class="btn-primary">Send an Email</a>
+      <a href="/cdn-cgi/l/email-protection#4a2b272b242b242b26333e232939390a2d272b232664292527" class="btn-primary">Send an Email</a>
     </div>
 
     <div class="contact-links fade-in">
-      <a href="mailto:amananalyticss@gmail.com" class="contact-link-row">
+      <a href="/cdn-cgi/l/email-protection#9dfcf0fcf3fcf3fcf1e4e9f4feeeeeddfaf0fcf4f1b3fef2f0" class="contact-link-row">
         <span class="contact-link-label">Email</span>
-        <span class="contact-link-value">amananalyticss@gmail.com</span>
+        <span class="contact-link-value"><span class="__cf_email__" data-cfemail="294844484748474845505d404a5a5a694e44484045074a4644">[email&#160;protected]</span></span>
         <span class="contact-arrow">→</span>
       </a>
       <a href="https://github.com/amananalytics" target="_blank" class="contact-link-row">
@@ -1126,7 +1132,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Nav scroll effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
